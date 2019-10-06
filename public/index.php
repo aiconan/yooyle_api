@@ -59,5 +59,11 @@ if (constant("Y_TYPE") == "baidu") {
 }
 
 // 输出结果
-print_r(json_encode($data,JSON_UNESCAPED_UNICODE));
+$data = json_encode($data, JSON_UNESCAPED_UNICODE);
+$callback = !empty($_GET['callback']) ? trim($_GET['callback']) : '';
+if(!empty($callback)) {
+    print_r("{$callback}({$data})");
+} else {
+    print_r($data);
+}
 ?>
