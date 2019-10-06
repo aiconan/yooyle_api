@@ -60,7 +60,7 @@ if (constant("Y_TYPE") == "baidu") {
 
 // 输出结果
 $data = json_encode($data, JSON_UNESCAPED_UNICODE);
-$callback = !empty($_GET['callback']) ? trim($_GET['callback']) : '';
+$callback = !empty($_GET['cb']) ? trim($_GET['cb']) : '';
 if(!empty($callback)) {
     print_r("{$callback}({$data})");
 } else {
