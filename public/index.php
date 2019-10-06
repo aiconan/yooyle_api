@@ -14,15 +14,50 @@
 // 基本参数
 error_reporting(0);
 header('Content-type: application/json');
+header('Y-Powered-By: Yooyle');
 
 // 定义变量
-define('Y_KEYWORDS', $_GET["keywords"] || $_POST["keywords"]);
-define('Y_LIMIT', $_GET["limit"] || $_POST["limit"]);
-define('Y_PAGE', $_GET["page"] || $_POST["page"]);
-define('Y_TYPE', $_GET["type"] || $_POST["type"]);
+define('Y_KEYWORDS', $_GET["keywords"]);
+define('Y_LIMIT', $_GET["limit"]);
+define('Y_PAGE', $_GET["page"]);
+define('Y_TYPE', $_GET["type"]);
 
-// 引入Composer自动加载文件
+// 引入文件，加载插件
 require '../vendor/autoload.php';
+use QL\QueryList;
+use QL\Ext\Baidu;
+use liesauer\QLPlugin\BingSearcher;
+use QL\Ext\Google;
+$ql = QueryList::getInstance();
+$ql->use([
+    Baidu::class,
+    BingSearcher::class,
+    Google::class
+]);
 
-echo constant("Y_KEYWORDS");
+// 引入搜索引擎
+if (constant("Y_TYPE") == "baidu") {
+    // For Baidu
+    $data = $ql->
+        baidu(constant("Y_LIMIT"))->
+        search(constant("Y_KEYWORDS"))->
+        page(constant("Y_PAGE"), true)->
+        all();
+} else if (constant("Y_TYPE") == "bing") {
+    // For Bing
+    $data = $ql->
+        BingSearcher(constant("Y_LIMIT"))->
+        search(constant("Y_KEYWORDS"))->
+        page(constant("Y_PAGE"));
+}else if (constant("Y_TYPE") == "google") {
+    // For Google
+    $data = $ql->
+        google(constant("Y_LIMIT"))->
+        search(constant("Y_KEYWORDS"))->
+        page(constant("Y_PAGE"))->
+        all();
+}
+
+// 输出结果
+print_r(json_encode($data,JSON_UNESCAPED_UNICODE));
 ?>

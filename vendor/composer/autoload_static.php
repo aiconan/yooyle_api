@@ -19,6 +19,10 @@ class ComposerStaticInit1982faa1be1c98a6d091114342857b1d
     );
 
     public static $prefixLengthsPsr4 = array (
+        'l' => 
+        array (
+            'liesauer\\' => 9,
+        ),
         'T' => 
         array (
             'Tightenco\\Collect\\' => 18,
@@ -64,6 +68,10 @@ class ComposerStaticInit1982faa1be1c98a6d091114342857b1d
     );
 
     public static $prefixDirsPsr4 = array (
+        'liesauer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/liesauer/ql-plugin-bingsearcher/src',
+        ),
         'Tightenco\\Collect\\' => 
         array (
             0 => __DIR__ . '/..' . '/tightenco/collect/src/Collect',
