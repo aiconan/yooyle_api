@@ -20,7 +20,6 @@ class Google implements PluginContract
     const API = 'https://www.google.co.jp/search';
     const RULES = [
       'title' => ['h3','text'],
-      'description' => ['.st','text'],
       'link' => ['h3>a','href']
     ];
     const RANGE = '.g';
