@@ -11,7 +11,8 @@ class BingSearcher implements PluginContract
     private static $range = '#b_results > .b_algo';
     private static $rules = [
         'title' => ['h2 > a', 'text'],
-        'link'  => ['h2 > a', 'href'],
+        'description' => ['.b_caption > p', 'text'],
+        'link'  => ['h2 > a', 'href']
     ];
 
     private $querylist;
